@@ -1,7 +1,19 @@
 import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
+import {
+  Row,
+  Col,
+  Form,
+  Card,
+  Select,
+  Icon,
+  Avatar,
+  List,
+  Tooltip,
+  Dropdown,
+  Menu,
+} from 'antd';
 
 import TagSelect from 'components/TagSelect';
 import StandardFormRow from 'components/StandardFormRow';
@@ -11,14 +23,19 @@ import styles from './Applications.less';
 const { Option } = Select;
 const FormItem = Form.Item;
 
-const formatWan = (val) => {
+const formatWan = val => {
   const v = val * 1;
   if (!v || isNaN(v)) return '';
 
   let result = val;
   if (val > 10000) {
     result = Math.floor(val / 10000);
-    result = <span>{result}<em className={styles.wan}>万</em></span>;
+    result = (
+      <span>
+        {result}
+        <em className={styles.wan}>万</em>
+      </span>
+    );
   }
   return result;
 };
@@ -43,7 +60,7 @@ export default class FilterCardList extends PureComponent {
     const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
-      form.validateFields((err) => {
+      form.validateFields(err => {
         if (!err) {
           // eslint-disable-next-line
           dispatch({
@@ -55,7 +72,7 @@ export default class FilterCardList extends PureComponent {
         }
       });
     }, 0);
-  }
+  };
 
   render() {
     const { list: { list }, loading, form } = this.props;
@@ -84,13 +101,31 @@ export default class FilterCardList extends PureComponent {
     const itemMenu = (
       <Menu>
         <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.alipay.com/"
+          >
+            1st menu item
+          </a>
         </Menu.Item>
         <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.taobao.com/"
+          >
+            2nd menu item
+          </a>
         </Menu.Item>
         <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3d menu item</a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.tmall.com/"
+          >
+            3d menu item
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -99,7 +134,11 @@ export default class FilterCardList extends PureComponent {
       <div className={styles.filterCardList}>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+            <StandardFormRow
+              title="所属类目"
+              block
+              style={{ paddingBottom: 11 }}
+            >
               <FormItem>
                 {getFieldDecorator('category')(
                   <TagSelect onChange={this.handleFormSubmit} expandable>
@@ -115,21 +154,14 @@ export default class FilterCardList extends PureComponent {
                     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
                     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
                     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-                  </TagSelect>
+                  </TagSelect>,
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow
-              title="其它选项"
-              grid
-              last
-            >
+            <StandardFormRow title="其它选项" grid last>
               <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
-                  <FormItem
-                    {...formItemLayout}
-                    label="作者"
-                  >
+                  <FormItem {...formItemLayout} label="作者">
                     {getFieldDecorator('author', {})(
                       <Select
                         onChange={this.handleFormSubmit}
@@ -137,15 +169,12 @@ export default class FilterCardList extends PureComponent {
                         style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">王昭君</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
                 <Col lg={8} md={10} sm={10} xs={24}>
-                  <FormItem
-                    {...formItemLayout}
-                    label="好评度"
-                  >
+                  <FormItem {...formItemLayout} label="好评度">
                     {getFieldDecorator('rate', {})(
                       <Select
                         onChange={this.handleFormSubmit}
@@ -154,7 +183,7 @@ export default class FilterCardList extends PureComponent {
                       >
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -174,10 +203,18 @@ export default class FilterCardList extends PureComponent {
                 hoverable
                 bodyStyle={{ paddingBottom: 20 }}
                 actions={[
-                  <Tooltip title="下载"><Icon type="download" /></Tooltip>,
-                  <Tooltip title="编辑"><Icon type="edit" /></Tooltip>,
-                  <Tooltip title="分享"><Icon type="share-alt" /></Tooltip>,
-                  <Dropdown overlay={itemMenu}><Icon type="ellipsis" /></Dropdown>,
+                  <Tooltip title="下载">
+                    <Icon type="download" />
+                  </Tooltip>,
+                  <Tooltip title="编辑">
+                    <Icon type="edit" />
+                  </Tooltip>,
+                  <Tooltip title="分享">
+                    <Icon type="share-alt" />
+                  </Tooltip>,
+                  <Dropdown overlay={itemMenu}>
+                    <Icon type="ellipsis" />
+                  </Dropdown>,
                 ]}
               >
                 <Card.Meta

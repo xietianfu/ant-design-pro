@@ -66,19 +66,19 @@ export default class Analysis extends Component {
     });
   }
 
-  handleChangeSalesType = (e) => {
+  handleChangeSalesType = e => {
     this.setState({
       salesType: e.target.value,
     });
   };
 
-  handleTabChange = (key) => {
+  handleTabChange = key => {
     this.setState({
       currentTabKey: key,
     });
   };
 
-  handleRangePickerChange = (rangePickerValue) => {
+  handleRangePickerChange = rangePickerValue => {
     this.setState({
       rangePickerValue,
     });
@@ -88,7 +88,7 @@ export default class Analysis extends Component {
     });
   };
 
-  selectDate = (type) => {
+  selectDate = type => {
     this.setState({
       rangePickerValue: getTimeDistance(type),
     });
@@ -150,16 +150,28 @@ export default class Analysis extends Component {
     const salesExtra = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
+          <a
+            className={this.isActive('today')}
+            onClick={() => this.selectDate('today')}
+          >
             今日
           </a>
-          <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
+          <a
+            className={this.isActive('week')}
+            onClick={() => this.selectDate('week')}
+          >
             本周
           </a>
-          <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
+          <a
+            className={this.isActive('month')}
+            onClick={() => this.selectDate('month')}
+          >
             本月
           </a>
-          <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
+          <a
+            className={this.isActive('year')}
+            onClick={() => this.selectDate('year')}
+          >
             全年
           </a>
         </div>
@@ -253,7 +265,12 @@ export default class Analysis extends Component {
                 </Tooltip>
               }
               total={yuan(126560)}
-              footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
+              footer={
+                <Field
+                  label="日均销售额"
+                  value={`￥${numeral(12423).format('0,0')}`}
+                />
+              }
               contentHeight={46}
             >
               <Trend flag="up" style={{ marginRight: 16 }}>
@@ -274,7 +291,9 @@ export default class Analysis extends Component {
                 </Tooltip>
               }
               total={numeral(8846).format('0,0')}
-              footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+              footer={
+                <Field label="日访问量" value={numeral(1234).format('0,0')} />
+              }
               contentHeight={46}
             >
               <MiniArea color="#975FE4" data={visitData} />
@@ -318,14 +337,23 @@ export default class Analysis extends Component {
               }
               contentHeight={46}
             >
-              <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
+              <MiniProgress
+                percent={78}
+                strokeWidth={8}
+                target={80}
+                color="#13C2C2"
+              />
             </ChartCard>
           </Col>
         </Row>
 
         <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
           <div className={styles.salesCard}>
-            <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
+            <Tabs
+              tabBarExtraContent={salesExtra}
+              size="large"
+              tabBarStyle={{ marginBottom: 24 }}
+            >
               <TabPane tab="销售额" key="sales">
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -339,7 +367,9 @@ export default class Analysis extends Component {
                       <ul className={styles.rankingList}>
                         {rankingListData.map((item, i) => (
                           <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
+                            <span className={i < 3 ? styles.active : ''}>
+                              {i + 1}
+                            </span>
                             <span>{item.title}</span>
                             <span>{numeral(item.total).format('0,0')}</span>
                           </li>
@@ -362,7 +392,9 @@ export default class Analysis extends Component {
                       <ul className={styles.rankingList}>
                         {rankingListData.map((item, i) => (
                           <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
+                            <span className={i < 3 ? styles.active : ''}>
+                              {i + 1}
+                            </span>
                             <span>{item.title}</span>
                             <span>{numeral(item.total).format('0,0')}</span>
                           </li>
@@ -392,7 +424,10 @@ export default class Analysis extends Component {
                       <span>
                         搜索用户数
                         <Tooltip title="指标文案">
-                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
+                          <Icon
+                            style={{ marginLeft: 8 }}
+                            type="info-circle-o"
+                          />
                         </Tooltip>
                       </span>
                     }
@@ -437,7 +472,10 @@ export default class Analysis extends Component {
                 <div className={styles.salesCardExtra}>
                   {iconGroup}
                   <div className={styles.salesTypeRadio}>
-                    <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
+                    <Radio.Group
+                      value={salesType}
+                      onChange={this.handleChangeSalesType}
+                    >
                       <Radio.Button value="all">全部渠道</Radio.Button>
                       <Radio.Button value="online">线上</Radio.Button>
                       <Radio.Button value="offline">门店</Radio.Button>
@@ -470,7 +508,10 @@ export default class Analysis extends Component {
         >
           <Tabs activeKey={activeKey} onChange={this.handleTabChange}>
             {offlineData.map(shop => (
-              <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}>
+              <TabPane
+                tab={<CustomTab data={shop} currentTabKey={activeKey} />}
+                key={shop.name}
+              >
                 <div style={{ padding: '0 24px' }}>
                   <TimelineChart
                     height={400}

@@ -12,9 +12,15 @@ const { SubMenu } = Menu;
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
-const getIcon = (icon) => {
+const getIcon = icon => {
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
-    return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
+    return (
+      <img
+        src={icon}
+        alt="icon"
+        className={`${styles.icon} sider-menu-item-img`}
+      />
+    );
   }
   if (typeof icon === 'string') {
     return <Icon type={icon} />;
@@ -23,7 +29,7 @@ const getIcon = (icon) => {
 };
 
 export const getMeunMatcheys = (flatMenuKeys, path) => {
-  return flatMenuKeys.filter((item) => {
+  return flatMenuKeys.filter(item => {
     return pathToRegexp(item).test(path);
   });
 };
@@ -52,7 +58,7 @@ export default class SiderMenu extends PureComponent {
   getDefaultCollapsedSubMenus(props) {
     const { location: { pathname } } = props || this.props;
     return urlToList(pathname)
-      .map((item) => {
+      .map(item => {
         return getMeunMatcheys(this.flatMenuKeys, item)[0];
       })
       .filter(item => item);
@@ -64,7 +70,7 @@ export default class SiderMenu extends PureComponent {
    */
   getFlatMenuKeys(menus) {
     let keys = [];
-    menus.forEach((item) => {
+    menus.forEach(item => {
       if (item.children) {
         keys = keys.concat(this.getFlatMenuKeys(item.children));
       }
@@ -77,7 +83,7 @@ export default class SiderMenu extends PureComponent {
    * Judge whether it is http link.return a or Link
    * @memberof SiderMenu
    */
-  getMenuItemPath = (item) => {
+  getMenuItemPath = item => {
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target, name } = item;
@@ -111,7 +117,7 @@ export default class SiderMenu extends PureComponent {
   /**
    * get SubMenu or Item
    */
-  getSubMenuOrItem = (item) => {
+  getSubMenuOrItem = item => {
     if (item.children && item.children.some(child => child.name)) {
       const childrenItems = this.getNavMenuItems(item.children);
       // 当无子菜单时就不展示菜单
@@ -125,8 +131,8 @@ export default class SiderMenu extends PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                  item.name
-                )
+                item.name
+              )
             }
             key={item.path}
           >
@@ -145,13 +151,13 @@ export default class SiderMenu extends PureComponent {
    * 获得菜单子节点
    * @memberof SiderMenu
    */
-  getNavMenuItems = (menusData) => {
+  getNavMenuItems = menusData => {
     if (!menusData) {
       return [];
     }
     return menusData
       .filter(item => item.name && !item.hideInMenu)
-      .map((item) => {
+      .map(item => {
         // make dom
         const ItemDom = this.getSubMenuOrItem(item);
         return this.checkPermissionItem(item.authority, ItemDom);
@@ -167,7 +173,7 @@ export default class SiderMenu extends PureComponent {
   };
   // conversion Path
   // 转化路径
-  conversionPath = (path) => {
+  conversionPath = path => {
     if (path && path.indexOf('http') === 0) {
       return path;
     } else {
@@ -182,15 +188,15 @@ export default class SiderMenu extends PureComponent {
     }
     return ItemDom;
   };
-  isMainMenu = (key) => {
+  isMainMenu = key => {
     return this.menus.some(
-      item =>
-        key && (item.key === key || item.path === key),
+      item => key && (item.key === key || item.path === key),
     );
-  }
-  handleOpenChange = (openKeys) => {
+  };
+  handleOpenChange = openKeys => {
     const lastOpenKey = openKeys[openKeys.length - 1];
-    const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
+    const moreThanOne =
+      openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
       openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
     });
@@ -202,8 +208,8 @@ export default class SiderMenu extends PureComponent {
     const menuProps = collapsed
       ? {}
       : {
-        openKeys,
-      };
+          openKeys,
+        };
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys();
     if (!selectedKeys.length) {

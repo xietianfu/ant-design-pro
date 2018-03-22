@@ -33,7 +33,7 @@ export default class CoverCardList extends PureComponent {
     const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
-      form.validateFields((err) => {
+      form.validateFields(err => {
         if (!err) {
           // eslint-disable-next-line
           dispatch({
@@ -66,7 +66,9 @@ export default class CoverCardList extends PureComponent {
             >
               <Card.Meta
                 title={<a href="#">{item.title}</a>}
-                description={<Ellipsis lines={2}>{item.subDescription}</Ellipsis>}
+                description={
+                  <Ellipsis lines={2}>{item.subDescription}</Ellipsis>
+                }
               />
               <div className={styles.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
@@ -99,7 +101,11 @@ export default class CoverCardList extends PureComponent {
       <div className={styles.coverCardList}>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+            <StandardFormRow
+              title="所属类目"
+              block
+              style={{ paddingBottom: 11 }}
+            >
               <FormItem>
                 {getFieldDecorator('category')(
                   <TagSelect onChange={this.handleFormSubmit} expandable>
@@ -115,7 +121,7 @@ export default class CoverCardList extends PureComponent {
                     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
                     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
                     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-                  </TagSelect>
+                  </TagSelect>,
                 )}
               </FormItem>
             </StandardFormRow>
@@ -130,7 +136,7 @@ export default class CoverCardList extends PureComponent {
                         style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">王昭君</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -144,7 +150,7 @@ export default class CoverCardList extends PureComponent {
                       >
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>

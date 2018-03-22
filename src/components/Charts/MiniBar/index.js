@@ -6,7 +6,12 @@ import styles from '../index.less';
 @autoHeight()
 export default class MiniBar extends React.Component {
   render() {
-    const { height, forceFit = true, color = '#1890FF', data = [] } = this.props;
+    const {
+      height,
+      forceFit = true,
+      color = '#1890FF',
+      data = [],
+    } = this.props;
 
     const scale = {
       x: {
@@ -41,7 +46,12 @@ export default class MiniBar extends React.Component {
             padding={padding}
           >
             <Tooltip showTitle={false} crosshairs={false} />
-            <Geom type="interval" position="x*y" color={color} tooltip={tooltip} />
+            <Geom
+              type="interval"
+              position="x*y"
+              color={color}
+              tooltip={tooltip}
+            />
           </Chart>
         </div>
       </div>

@@ -23,9 +23,7 @@ describe('test meun match', () => {
   });
 
   it('Parameter path', () => {
-    expect(getMeunMatcheys(meun, '/userinfo/2144')).toEqual([
-      '/userinfo/:id',
-    ]);
+    expect(getMeunMatcheys(meun, '/userinfo/2144')).toEqual(['/userinfo/:id']);
   });
 
   it('three parameter path', () => {

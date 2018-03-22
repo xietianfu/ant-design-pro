@@ -29,7 +29,7 @@ class TagSelect extends Component {
     }
   }
 
-  onChange = (value) => {
+  onChange = value => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
       this.setState({ value });
@@ -37,15 +37,15 @@ class TagSelect extends Component {
     if (onChange) {
       onChange(value);
     }
-  }
+  };
 
-  onSelectAll = (checked) => {
+  onSelectAll = checked => {
     let checkedTags = [];
     if (checked) {
       checkedTags = this.getAllTags();
     }
     this.onChange(checkedTags);
-  }
+  };
 
   getAllTags() {
     let { children } = this.props;
@@ -66,19 +66,22 @@ class TagSelect extends Component {
       checkedTags.splice(index, 1);
     }
     this.onChange(checkedTags);
-  }
+  };
 
   handleExpand = () => {
     this.setState({
       expand: !this.state.expand,
     });
-  }
+  };
 
-  isTagSelectOption = (node) => {
-    return node && node.type && (
-      node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption'
+  isTagSelectOption = node => {
+    return (
+      node &&
+      node.type &&
+      (node.type.isTagSelectOption ||
+        node.type.displayName === 'TagSelectOption')
     );
-  }
+  };
 
   render() {
     const { value, expand } = this.state;
@@ -99,8 +102,8 @@ class TagSelect extends Component {
         >
           全部
         </CheckableTag>
-        {
-          value && React.Children.map(children, (child) => {
+        {value &&
+          React.Children.map(children, child => {
             if (this.isTagSelectOption(child)) {
               return React.cloneElement(child, {
                 key: `tag-select-${child.props.value}`,
@@ -110,15 +113,12 @@ class TagSelect extends Component {
               });
             }
             return child;
-          })
-        }
-        {
-          expandable && (
-            <a className={styles.trigger} onClick={this.handleExpand}>
-              {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
-            </a>
-          )
-        }
+          })}
+        {expandable && (
+          <a className={styles.trigger} onClick={this.handleExpand}>
+            {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+          </a>
+        )}
       </div>
     );
   }

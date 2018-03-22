@@ -21,22 +21,22 @@ describe('test CheckPermissions', () => {
   });
   it('Correct Array permission authentication', () => {
     expect(checkPermissions(['user', 'admin'], 'user', target, error)).toEqual(
-      'ok'
+      'ok',
     );
   });
   it('Wrong Array permission authentication,currentAuthority error', () => {
     expect(
-      checkPermissions(['user', 'admin'], 'user,admin', target, error)
+      checkPermissions(['user', 'admin'], 'user,admin', target, error),
     ).toEqual('error');
   });
   it('Wrong Array permission authentication', () => {
     expect(checkPermissions(['user', 'admin'], 'guest', target, error)).toEqual(
-      'error'
+      'error',
     );
   });
   it('Wrong Function permission authentication', () => {
     expect(checkPermissions(() => false, 'guest', target, error)).toEqual(
-      'error'
+      'error',
     );
   });
   it('Correct Function permission authentication', () => {

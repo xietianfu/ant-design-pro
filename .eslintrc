@@ -1,7 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["compat"],
+  "extends": ["airbnb","prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -53,8 +52,7 @@
     "object-curly-newline": [0],
     "function-paren-newline": [0],
     "no-restricted-globals": [0],
-    "require-yield": [1],
-    "compat/compat": "error"
+    "require-yield": [1]
   },
   "parserOptions": {
     "ecmaFeatures": {

@@ -10,7 +10,7 @@ const { TabPane } = Tabs;
 export function getBreadcrumb(breadcrumbNameMap, url) {
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
-    Object.keys(breadcrumbNameMap).forEach((item) => {
+    Object.keys(breadcrumbNameMap).forEach(item => {
       if (pathToRegexp(item).test(url)) {
         breadcrumb = breadcrumbNameMap[item];
       }
@@ -26,7 +26,7 @@ export default class PageHeader extends PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   };
-  onChange = (key) => {
+  onChange = key => {
     if (this.props.onTabChange) {
       this.props.onTabChange(key);
     }

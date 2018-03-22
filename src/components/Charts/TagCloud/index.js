@@ -10,7 +10,8 @@ import styles from './index.less';
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 
-const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
+const imgUrl =
+  'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
 @autoHeight()
 class TagCloud extends Component {
@@ -39,7 +40,7 @@ class TagCloud extends Component {
     this.renderChart();
   };
 
-  saveRootRef = (node) => {
+  saveRootRef = node => {
     this.root = node;
   };
 
@@ -57,7 +58,7 @@ class TagCloud extends Component {
           fill: cfg.color,
           textBaseline: 'Alphabetic',
         },
-        cfg.style
+        cfg.style,
       );
     }
 
@@ -77,7 +78,7 @@ class TagCloud extends Component {
 
   @Bind()
   @Debounce(500)
-  renderChart = (nextProps) => {
+  renderChart = nextProps => {
     // const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
     const { data, height } = nextProps || this.props;
 

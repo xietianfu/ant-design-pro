@@ -21,7 +21,7 @@ export default class Radar extends Component {
     }
   }
 
-  getG2Instance = (chart) => {
+  getG2Instance = chart => {
     this.chart = chart;
   };
 
@@ -31,7 +31,7 @@ export default class Radar extends Component {
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
-    const legendData = items.map((item) => {
+    const legendData = items.map(item => {
       // eslint-disable-next-line
       const origins = item.map(t => t._origin);
       const result = {
@@ -49,7 +49,7 @@ export default class Radar extends Component {
     });
   };
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
   };
 
@@ -178,7 +178,7 @@ export default class Radar extends Component {
                   <h6>{item.value}</h6>
                 </div>
               </Col>
-           ))}
+            ))}
           </Row>
         )}
       </div>

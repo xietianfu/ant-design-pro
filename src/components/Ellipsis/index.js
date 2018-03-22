@@ -125,29 +125,36 @@ export default class Ellipsis extends Component {
     }
   };
 
-  handleRoot = (n) => {
+  handleRoot = n => {
     this.root = n;
   };
 
-  handleContent = (n) => {
+  handleContent = n => {
     this.content = n;
   };
 
-  handleNode = (n) => {
+  handleNode = n => {
     this.node = n;
   };
 
-  handleShadow = (n) => {
+  handleShadow = n => {
     this.shadow = n;
   };
 
-  handleShadowChildren = (n) => {
+  handleShadowChildren = n => {
     this.shadowChildren = n;
   };
 
   render() {
     const { text, targetCount } = this.state;
-    const { children, lines, length, className, tooltip, ...restProps } = this.props;
+    const {
+      children,
+      lines,
+      length,
+      className,
+      tooltip,
+      ...restProps
+    } = this.props;
 
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
@@ -175,7 +182,9 @@ export default class Ellipsis extends Component {
       );
     }
 
-    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
+    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(
+      Math.random() * 100,
+    )}`}`;
 
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
