@@ -14,6 +14,21 @@ const menuData = [{
     name: '工作台',
     path: 'workplace',
     // hideInMenu: true,
+  }, {
+    name: '测试页',
+    path: 'test',
+  }],
+}, {
+  // 测试新布局
+  name: '新布局',
+  icon: 'table',
+  path: 'new',
+  children: [{
+    name: '页面一',
+    path: 'page1',
+  }, {
+    name: '页面二',
+    path: 'page2',
   }],
 }, {
   name: '表单页',
@@ -115,17 +130,26 @@ const menuData = [{
   }],
 }];
 
+/**
+ * 格式化菜单数据
+ * @param {Array} data 菜单数据
+ * @param {String} parentPath 父地址
+ * @param {String} parentAuthority 父节点的权限
+ * @returns {Array} 基于原始菜单处理后的新菜单
+ */
 function formatter(data, parentPath = '/', parentAuthority) {
   return data.map((item) => {
     let { path } = item;
     if (!isUrl(path)) {
       path = parentPath + item.path;
     }
+    // 处理返回结果，覆盖不和条件的path，如果没有权限设置，继承父节点的权限
     const result = {
       ...item,
       path,
       authority: item.authority || parentAuthority,
     };
+    // 处理子节点
     if (item.children) {
       result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority);
     }

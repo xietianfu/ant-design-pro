@@ -23,6 +23,10 @@ const { AuthorizedRoute, check } = Authorized;
  * 根据菜单取得重定向地址.
  */
 const redirectData = [];
+/**
+ * 将菜单进行从定向后的对象值存入redirectData数组中
+ * @param {Object} item 单个的菜单数据
+ */
 const getRedirect = (item) => {
   if (item && item.children) {
     if (item.children[0] && item.children[0].path) {
@@ -38,6 +42,7 @@ const getRedirect = (item) => {
 };
 getMenuData().forEach(getRedirect);
 
+/** 设定响应式页面的界限 */
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -59,11 +64,15 @@ const query = {
   },
 };
 
+/** 处理移动端的情况 */
 let isMobile;
 enquireScreen((b) => {
   isMobile = b;
 });
 
+/**
+ * @extends React.PureComponent  -纯组件 可以减少不必要的 render 操作的次数
+ */
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,

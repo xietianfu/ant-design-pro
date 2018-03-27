@@ -153,7 +153,11 @@ export function getRoutes(path, routerData) {
 
 /* eslint no-useless-escape:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g;
-
+/**
+ * 判断是否为一个Url地址
+ * @param {String} path 地址
+ * @returns bool
+ */
 export function isUrl(path) {
   return reg.test(path);
 }

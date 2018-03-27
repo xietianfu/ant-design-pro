@@ -73,6 +73,20 @@ export const getRouterData = (app) => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
+    // 测试新增页面
+    '/new': {
+      component: dynamicWrapper(app, ['monitor'], () => import('../layouts/NewLayout')),
+    },
+    // '/new/page1': {
+    //   component: dynamicWrapper(app, ['monitor'], () => import('../routes/New/Page1')),
+    // },
+    // '/new/page2': {
+    //   component: dynamicWrapper(app, ['monitor'], () => import('../routes/New/Page2')),
+    // },
+    // 测试路由节点
+    '/dashboard/test': {
+      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Test')),
+    },
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },

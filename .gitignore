@@ -21,3 +21,4 @@ package-lock.json
 *bak
 jsconfig.json
 .prettierrc
+*.jsx
