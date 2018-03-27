@@ -81,7 +81,9 @@ class BasicLayout extends React.PureComponent {
   state = {
     isMobile,
   };
+  /** 设置context */
   getChildContext() {
+    // 获取父组件的位置和路由数据
     const { location, routerData } = this.props;
     return {
       location,
@@ -89,19 +91,23 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
+    // 如果是移动设备，将设备信息存入状态中
     enquireScreen((mobile) => {
       this.setState({
         isMobile: mobile,
       });
     });
+    // TODO: 复习redux
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
+    // 取得地址名称
     const { pathname } = location;
     let title = 'Ant Design Pro';
+    // 如果路由数据中已经有了地址名称，在其后添加一句话
     if (routerData[pathname] && routerData[pathname].name) {
       title = `${routerData[pathname].name} - Ant Design Pro`;
     }
@@ -110,22 +116,29 @@ class BasicLayout extends React.PureComponent {
   getBashRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
+    // NOTE: window.location --- 只读属性，返回一个 Location 对象，其中包含有关文档当前位置的信息。new URL() --- 构造函数返回一个新创建的URL对象，表示由参数定义的URL。
     const urlParams = new URL(window.location.href);
-
+    // NOTE: searchParams用于访问url中的查询参数。比如http://localhost?a=1&b=2,searchParams等于{a: 1, b: 2}。
+    // 取得查询参数中属性为redirect的值
     const redirect = urlParams.searchParams.get('redirect');
     // Remove the parameters in the url
     if (redirect) {
       urlParams.searchParams.delete('redirect');
+      // NOTE: window.history https://developer.mozilla.org/zh-CN/docs/Web/API/History_API
+      // 重定向到删除redirect后的URL
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
       const { routerData } = this.props;
       // get the first authorized route path in routerData
+      // NOTE: Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 。find() 方法返回数组中满足提供的测试函数的第一个元素的值。
       const authorizedPath = Object.keys(routerData).find(item =>
         check(routerData[item].authority, item) && item !== '/');
       return authorizedPath;
     }
     return redirect;
   }
+
+
   handleMenuCollapse = (collapsed) => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
