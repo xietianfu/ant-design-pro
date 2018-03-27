@@ -1,5 +1,6 @@
 import 'rc-drawer-menu/assets/index.css';
 import React from 'react';
+/** 处理移动端访问时的菜单样式 */
 import DrawerMenu from 'rc-drawer-menu';
 import SiderMenu from './SiderMenu';
 

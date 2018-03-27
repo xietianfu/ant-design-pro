@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+/** 用于返回一个满足要求的正则表达式 */
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import styles from './index.less';
@@ -12,16 +13,28 @@ const { SubMenu } = Menu;
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
+/**
+ * 对定义的图标进行格式化处理，以使其是一个ReactNode
+ * @param {String} icon 图标
+ */
 const getIcon = (icon) => {
+  // 当ico值为url地址时
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
     return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
   }
+  // 是字体图标时
   if (typeof icon === 'string') {
     return <Icon type={icon} />;
   }
+  // 是字体图标元素时
   return icon;
 };
 
+/**
+ * 设定菜单项的Key值
+ * @param {*} flatMenuKeys 原始的菜单key
+ * @param {*} path 地址
+ */
 export const getMeunMatcheys = (flatMenuKeys, path) => {
   return flatMenuKeys.filter((item) => {
     return pathToRegexp(item).test(path);
@@ -95,6 +108,7 @@ export default class SiderMenu extends PureComponent {
         to={itemPath}
         target={target}
         replace={itemPath === this.props.location.pathname}
+        // 移动设备点击后收起菜单
         onClick={
           this.props.isMobile
             ? () => {

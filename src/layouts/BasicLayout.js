@@ -113,10 +113,17 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
+  /**
+   * 重定向到 url 的 redirect 参数所示地址
+   * @returns {String} url中redirect的值
+   */
   getBashRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
-    // NOTE: window.location --- 只读属性，返回一个 Location 对象，其中包含有关文档当前位置的信息。new URL() --- 构造函数返回一个新创建的URL对象，表示由参数定义的URL。
+    /**
+     * NOTE: window.location --- 只读属性，返回一个 Location 对象，其中包含有关文档当前位置的信息。
+     * new URL() --- 构造函数返回一个新创建的URL对象，表示由参数定义的URL。
+     */
     const urlParams = new URL(window.location.href);
     // NOTE: searchParams用于访问url中的查询参数。比如http://localhost?a=1&b=2,searchParams等于{a: 1, b: 2}。
     // 取得查询参数中属性为redirect的值
@@ -130,7 +137,10 @@ class BasicLayout extends React.PureComponent {
     } else {
       const { routerData } = this.props;
       // get the first authorized route path in routerData
-      // NOTE: Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 。find() 方法返回数组中满足提供的测试函数的第一个元素的值。
+      /**
+       * NOTE: Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 。
+       * find() 方法返回数组中满足提供的测试函数的第一个元素的值。
+       */
       const authorizedPath = Object.keys(routerData).find(item =>
         check(routerData[item].authority, item) && item !== '/');
       return authorizedPath;
@@ -138,7 +148,7 @@ class BasicLayout extends React.PureComponent {
     return redirect;
   }
 
-
+  // TODO: redux部分
   handleMenuCollapse = (collapsed) => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
@@ -171,6 +181,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
+    // 从父组件取得当前用户、菜单展开收缩状态、抓取的消息、通知消息、路由数据、匹配信息（route中的路由信息）、位置
     const {
       currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
@@ -260,6 +271,7 @@ class BasicLayout extends React.PureComponent {
 
     return (
       <DocumentTitle title={this.getPageTitle()}>
+        { /* 设置媒体查询的界限 */ }
         <ContainerQuery query={query}>
           {params => <div className={classNames(params)}>{layout}</div>}
         </ContainerQuery>
