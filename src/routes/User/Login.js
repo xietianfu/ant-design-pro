@@ -21,6 +21,7 @@ export default class LoginPage extends Component {
     this.setState({ type });
   }
 
+  // TODO: 修改用户登录，以便和数据库相连
   handleSubmit = (err, values) => {
     const { type } = this.state;
     if (!err) {
@@ -56,7 +57,7 @@ export default class LoginPage extends Component {
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
         >
-          <Tab key="account" tab="账户密码登录">
+          <Tab key="account" tab="用户登录">
             {
               login.status === 'error' &&
               login.type === 'account' &&
@@ -66,28 +67,12 @@ export default class LoginPage extends Component {
             <UserName name="userName" placeholder="admin/user" />
             <Password name="password" placeholder="888888/123456" />
           </Tab>
-          <Tab key="mobile" tab="手机号登录">
-            {
-              login.status === 'error' &&
-              login.type === 'mobile' &&
-              !login.submitting &&
-              this.renderMessage('验证码错误')
-            }
-            <Mobile name="mobile" />
-            <Captcha name="captcha" />
-          </Tab>
           <div>
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
             <a style={{ float: 'right' }} href="">忘记密码</a>
-          </div>
-          <Submit loading={submitting}>登录</Submit>
-          <div className={styles.other}>
-            其他登录方式
-            <Icon className={styles.icon} type="alipay-circle" />
-            <Icon className={styles.icon} type="taobao-circle" />
-            <Icon className={styles.icon} type="weibo-circle" />
             <Link className={styles.register} to="/user/register">注册账户</Link>
           </div>
+          <Submit loading={submitting}>登录</Submit>
         </Login>
       </div>
     );
