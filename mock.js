@@ -133,4 +133,4 @@ const proxy = {
   },
 };
 
-export default noProxy ? {} : delay(proxy, 0);
+export default (noProxy ? {"/*": "http://192.168.192.1:4000/"} : delay(proxy, 0));

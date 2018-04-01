@@ -22,4 +22,11 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  "proxy": {
+    "/*": {
+      "target": "http://192.168.192.1:4000/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
+    }
+  }
 };
